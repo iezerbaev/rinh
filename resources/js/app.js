@@ -1,14 +1,15 @@
-require('./bootstrap');
-
-require('moment');
-
+import './bootstrap';
+import 'moment';
 import Vue from 'vue';
-
-import { InertiaApp } from '@inertiajs/inertia-vue';
-import { InertiaForm } from 'laravel-jetstream';
+import {InertiaApp} from '@inertiajs/inertia-vue';
+import {InertiaForm} from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
+import VueTailwind from 'vue-tailwind'
+import VueTailwindSettings from './Settings/vue-tailwind';
 
-Vue.mixin({ methods: { route } });
+
+Vue.use(VueTailwind, VueTailwindSettings);
+Vue.mixin({methods: {route}});
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);

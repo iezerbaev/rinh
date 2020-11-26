@@ -8,7 +8,7 @@
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
                             <inertia-link :href="route('dashboard')">
-                                <jet-application-mark class="block h-9 w-auto" />
+                                <img class="w-16 h-16" src="https://rsue.ru/bitrix/templates/info_light_blue/img/logo.svg" alt="Логотип"/>
                             </inertia-link>
                         </div>
 
@@ -43,11 +43,11 @@
                                 <template #content>
                                     <!-- Account Management -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Manage Account
+                                        Настройка Аккаунта
                                     </div>
 
                                     <jet-dropdown-link :href="route('profile.show')">
-                                        Profile
+                                        Профиль
                                     </jet-dropdown-link>
 
                                     <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
@@ -95,7 +95,7 @@
                                     <!-- Authentication -->
                                     <form @submit.prevent="logout">
                                         <jet-dropdown-link as="button">
-                                            Logout
+                                            Выйти
                                         </jet-dropdown-link>
                                     </form>
                                 </template>
@@ -119,7 +119,7 @@
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
                     <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                        Dashboard
+                        Панель Управления
                     </jet-responsive-nav-link>
                 </div>
 
@@ -138,7 +138,7 @@
 
                     <div class="mt-3 space-y-1">
                         <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                            Profile
+                            Профиль
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
@@ -148,7 +148,7 @@
                         <!-- Authentication -->
                         <form method="POST" @submit.prevent="logout">
                             <jet-responsive-nav-link as="button">
-                                Logout
+                                Выйти
                             </jet-responsive-nav-link>
                         </form>
 

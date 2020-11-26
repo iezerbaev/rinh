@@ -1,33 +1,40 @@
 <template>
     <jet-form-section @submitted="OnFormHandler">
         <template #title>
-            Email Change
+            Изменить E-Mail Адрес
         </template>
         <template #description>
-            Change your email address.
+            Введите ваш личный E-Mail адрес, на него придет письмо с ссылкой не подтверждение.
         </template>
         <template #form>
             <!-- Current Email -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="currentEmail" value="Current Email"/>
+                <jet-label for="currentEmail" value="Текущий E-Mail Адрес"/>
                 <jet-input id="currentEmail" type="email" class="mt-1 block w-full" v-model="form.currentEmail" disabled="true"/>
                 <jet-input-error :message="form.error('currentEmail')" class="mt-2"/>
             </div>
 
             <!-- New Email -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="newEmail" value="New Email"/>
+                <jet-label for="newEmail" value="Новый E-Mail Адрес"/>
                 <jet-input id="newEmail" type="email" class="mt-1 block w-full" v-model="form.newEmail"/>
                 <jet-input-error :message="form.error('newEmail')" class="mt-2"/>
+            </div>
+
+            <!-- Password -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="current_password" value="Текущий Пароль" />
+                <jet-input id="current_password" type="password" class="mt-1 block w-full" v-model="form.current_password" ref="current_password" autocomplete="current-password" />
+                <jet-input-error :message="form.error('current_password')" class="mt-2" />
             </div>
         </template>
         <template #actions>
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Сохранен.
             </jet-action-message>
 
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Сохранить
             </jet-button>
         </template>
     </jet-form-section>

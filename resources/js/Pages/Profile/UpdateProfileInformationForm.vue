@@ -1,7 +1,7 @@
 <template>
     <jet-form-section @submitted="updateProfileInformation">
         <template #title>
-            Мой Профиль
+            Профиль
         </template>
 
         <template #description>
@@ -31,12 +31,52 @@
                     </span>
                 </div>
 
-                <jet-secondary-button class="mt-2 mr-2" type="button" @click.native.prevent="selectNewPhoto">
-                    Выбрать новое фото
-                </jet-secondary-button>
+                <t-modal ref="modal" header="Title of the modal">
+                    <input
+                        class="hidden"
+                        ref="imageFileThumbnail"
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        @change="setImage"
+                    />
+                    <div class="content">
+                        <section class="cropper-area">
+                            <div class="img-cropper">
+                                <vue-cropper
+                                    ref="cropper"
+                                    :aspect-ratio="1 / 1"
+                                    :src="imgSrc"
+                                    preview=".preview"
+                                    view-mode="4"
+                                />
+                            </div>
+                        </section>
+                        <section class="flex flex-row justify-center preview-area mt-2">
+                            <div class="preview w-40 h-32 rounded-full overflow-hidden" />
+                            <div class="preview w-32 h-24 rounded-full overflow-hidden" />
+                            <div class="preview w-20 h-20 rounded-full overflow-hidden" />
+                        </section>
+                    </div>
+                    <template v-slot:footer>
+                        <div class="flex justify-end">
+                            <jet-secondary-button class="mt-2 mr-2" @click.native.prevent="showFileChooser">
+                                Выбрать фотографию
+                            </jet-secondary-button>
+                            <jet-secondary-button class="mt-2 mr-2" @click.native.prevent="$refs.modal.hide()">
+                                Закрыть
+                            </jet-secondary-button>
+                            <jet-button class="mt-2 mr-2"  @click.native.prevent="cropImage">
+                                Сохранить
+                            </jet-button>
+                        </div>
+                    </template>
+                </t-modal>
+
+                <jet-secondary-button type="button" variant="secondary-outline" @click.native.prevent="$refs.modal.show()">Изменить</jet-secondary-button>
 
                 <jet-secondary-button type="button" class="mt-2" @click.native.prevent="deletePhoto"
-                                  v-if="user.profile_photo_path">
+                                      v-if="user.profile_photo_path">
                     Удалить фото
                 </jet-secondary-button>
 
@@ -47,7 +87,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="firstname" value="Имя"/>
                 <jet-input id="firstname" type="text" class="mt-1 block w-full" v-model="form.firstname"
-                       autocomplete="firstname"/>
+                           autocomplete="firstname"/>
                 <jet-input-error :message="form.error('firstname')" class="mt-2"/>
             </div>
 
@@ -55,7 +95,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="lastname" value="Фамилия"/>
                 <jet-input id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname"
-                       autocomplete="lastname"/>
+                           autocomplete="lastname"/>
                 <jet-input-error :message="form.error('lastname')" class="mt-2"/>
             </div>
 
@@ -63,7 +103,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="patronymic" value="Отчество"/>
                 <jet-input id="patronymic" type="text" class="mt-1 block w-full" v-model="form.patronymic"
-                       autocomplete="patronymic"/>
+                           autocomplete="patronymic"/>
                 <jet-input-error :message="form.error('patronymic')" class="mt-2"/>
             </div>
 
@@ -71,7 +111,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="phone" value="Номер телефона"/>
                 <jet-input id="phone" type="text" class="mt-1 block w-full" v-model="form.phone"
-                       autocomplete="phone"/>
+                           autocomplete="phone"/>
                 <jet-input-error :message="form.error('phone')" class="mt-2"/>
             </div>
 
@@ -96,7 +136,6 @@
                 />
                 <jet-input-error :message="form.error('gender')" class="mt-2"/>
             </div>
-
         </template>
 
         <template #actions>
@@ -107,17 +146,20 @@
                 Сохранить
             </jet-button>
         </template>
+
     </jet-form-section>
 </template>
 
 <script>
-import JetButton from '@/Jetstream/Button'
-import JetFormSection from '@/Jetstream/FormSection'
-import JetInput from '@/Jetstream/Input'
-import JetInputError from '@/Jetstream/InputError'
-import JetLabel from '@/Jetstream/Label'
-import JetActionMessage from '@/Jetstream/ActionMessage'
-import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import JetButton from '../../Jetstream/Button';
+import JetFormSection from '../../Jetstream/FormSection';
+import JetInput from '../../Jetstream/Input';
+import JetInputError from '../../Jetstream/InputError';
+import JetLabel from '../../Jetstream/Label';
+import JetActionMessage from '../../Jetstream/ActionMessage';
+import JetSecondaryButton from '../../Jetstream/SecondaryButton';
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
 
 export default {
     components: {
@@ -128,6 +170,7 @@ export default {
         JetInputError,
         JetLabel,
         JetSecondaryButton,
+        VueCropper
     },
 
     props: ['user'],
@@ -159,6 +202,9 @@ export default {
                 }
             ),
             photoPreview: null,
+            isThumbnailModal: false,
+            imgSrc: '',
+            cropImg: ''
         }
     },
     computed: {
@@ -206,6 +252,31 @@ export default {
             }).then(() => {
                 this.photoPreview = null
             });
+        },
+        cropImage() {
+            // get image data for post processing, e.g. upload or setting image src
+            this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+        },
+        setImage(e) {
+            const file = e.target.files[0];
+            if (file.type.indexOf('image/') === -1) {
+                alert('Please select an image file');
+                return;
+            }
+            if (typeof FileReader === 'function') {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    this.imgSrc = event.target.result;
+                    // rebuild cropperjs with the updated source
+                    this.$refs.cropper.replace(event.target.result);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Sorry, FileReader API not supported');
+            }
+        },
+        showFileChooser() {
+            this.$refs.imageFileThumbnail.click();
         },
     },
 }

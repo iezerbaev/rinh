@@ -40,13 +40,17 @@ const settings = {
         }
     },
     TButton: {
-        fixedClasses: 'focus:outline-none focus:shadow-outline inline-flex items-center transition ease-in-out duration-150',
-        classes: 'text-white bg-blue-600 hover:bg-blue-500 focus:border-blue-700 active:bg-blue-700 text-sm font-medium border border-transparent px-3 py-2 rounded-md',
+        fixedClasses: 'inline-flex items-center px-4 py-2 border rounded-md font-semibold text-xs uppercase tracking-widest',
+        classes: 'bg-blue-800 border-transparent text-white hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150',
         variants: {
-            secondary: 'text-gray-800 bg-white hover:text-gray-600 text-sm font-medium border px-3 py-2 rounded-md',
-            error: 'text-white bg-red-600 hover:bg-red-500 focus:border-red-700  active:bg-red-700 text-sm font-medium border border-transparent px-3 py-2 rounded-md',
-            success: 'text-white bg-green-600 hover:bg-green-500 focus:border-green-700 active:bg-green-700 text-sm font-medium border border-transparent px-3 py-2 rounded-md',
-            link: 'text-blue-500 underline hover:bg-blue-100 text-sm font-medium border border-transparent px-3 py-2 rounded-md'
+            secondary: 'bg-gray-500 border-transparent text-white hover:bg-gray-700 active:bg-gray-400 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150',
+            error: 'bg-red-800 border-transparent text-white hover:bg-gray-700 active:bg-gray-400 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150',
+            success: 'bg-green-800 border-transparent text-white hover:bg-gray-700 active:bg-gray-400 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150',
+            warning: 'bg-yellow-800 border-transparent text-white hover:bg-gray-700 active:bg-gray-400 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150',
+            link: 'text-blue-500 underline hover:bg-blue-100 text-sm font-medium border border-transparent px-3 py-2 rounded-md',
+            'secondary-outline': 'bg-white border-gray-300 text-gray-700 shadow-sm hover:bg-gray-400 hover:text-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150',
+            'success-outline': 'bg-white border-green-500 text-green-800 shadow-sm hover:bg-green-500 hover:text-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150',
+            'error-outline': 'bg-white border-red-500 text-red-600 shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150',
         }
     },
     TInputGroup: {

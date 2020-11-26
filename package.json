@@ -27,6 +27,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "vue-cropperjs": "^4.1.0",
         "vue-tailwind": "^1.3.3"
     }
 }

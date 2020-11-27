@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->enum('language', ['ru', 'en'])->default('ru');
             $table->tinyInteger('status')->nullable();
             $table->tinyInteger('type')->nullable();
-            $table->text('profile_photo_path')->nullable();
+            $table->text('thumbnail')->nullable();
             $table->date('birthday_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('type_verified_at')->nullable();

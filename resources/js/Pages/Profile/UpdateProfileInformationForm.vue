@@ -20,7 +20,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" alt="Фото профиля"
+                    <img :src="user.thumbnail" alt="Фото профиля"
                          class="rounded-full h-20 w-20 object-cover">
                 </div>
 
@@ -43,7 +43,7 @@
                     <div class="content">
                         <section class="cropper-area">
                             <div class="img-cropper">
-                                <vue-cropper
+                                <vue-cropper v-if="imgSrc !== null"
                                     ref="cropper"
                                     :aspect-ratio="1 / 1"
                                     :src="imgSrc"
@@ -66,7 +66,7 @@
                             <jet-secondary-button class="mt-2 mr-2" @click.native.prevent="$refs.modal.hide()">
                                 Закрыть
                             </jet-secondary-button>
-                            <jet-button class="mt-2 mr-2"  @click.native.prevent="cropImage">
+                            <jet-button class="mt-2 mr-2"  @click.native.prevent="saveImage">
                                 Сохранить
                             </jet-button>
                         </div>
@@ -76,7 +76,7 @@
                 <jet-secondary-button type="button" variant="secondary-outline" @click.native.prevent="$refs.modal.show()">Изменить</jet-secondary-button>
 
                 <jet-secondary-button type="button" class="mt-2" @click.native.prevent="deletePhoto"
-                                      v-if="user.profile_photo_path">
+                                      v-if="user.thumbnail">
                     Удалить фото
                 </jet-secondary-button>
 
@@ -203,8 +203,9 @@ export default {
             ),
             photoPreview: null,
             isThumbnailModal: false,
-            imgSrc: '',
-            cropImg: ''
+            imgSrc: null,
+            cropImg: null,
+            data: null,
         }
     },
     computed: {
@@ -278,6 +279,53 @@ export default {
         showFileChooser() {
             this.$refs.imageFileThumbnail.click();
         },
+        saveImage(event) {
+            this.$inertia.put('/api/v1/thumbnail', this.imgSrc);
+        },
+        open(e) {
+            const file = e.target.files[0];
+            if (file.type.indexOf('image/') === -1) {
+                this.makeToast(this.localization.error, this.localization.file.error, 'danger')
+                return;
+            }
+            if (typeof FileReader === 'function') {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    this.image = event.target.result;
+                    this.$refs.cropper.replace(event.target.result);
+                };
+                reader.readAsDataURL(file);
+                this.isOpened = true;
+            } else {
+                this.makeToast(this.localization.error, this.localization.file.oldBrowser, 'danger')
+            }
+        },
+        upload(e) {
+            this.$refs.cropper.getCroppedCanvas({width: 250, height: 250}).toBlob(async blob => {
+                this.isLoading = true;
+                let data = new FormData();
+                data.append("thumbnail", blob, "thumbnail.jpg");
+                try {
+                    const response = await HttpRequest.create().withAxios().post("ajax/image/thumbnail", data, {
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    });
+                    this.setThumbnail(response.data.url);
+                    this.image = response.data.url;
+                    this.makeToast(this.localization.success, this.localization.thumbnail.success, 'success');
+                } catch (e) {
+                    this.makeToast(this.localization.error, this.localization.whoops, 'danger')
+                }
+                this.$refs.cropper.destroy();
+                this.image = null;
+                this.isLoading = false;
+                this.isOpened = false;
+            });
+        },
+        setThumbnail(url) {
+            document.querySelector('.thumbnail').src = url;
+        }
     },
 }
 </script>

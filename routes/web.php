@@ -20,3 +20,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
+
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::prefix('/project')->name('project.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Inertia\ProjectController::class, 'index'])->name('index');
+    });
+});

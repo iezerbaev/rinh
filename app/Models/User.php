@@ -145,10 +145,18 @@ class User extends Authenticatable implements HasMedia
      */
     protected $appends = [
         'thumbnail',
+        'name'
     ];
+
+    public function getNameAttribute(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 
     public function getThumbnailAttribute(): string
     {
-        return $this->thumbnail ?? '';
+        return $this->hasMedia('thumbnails')
+            ? $this->getFirstMediaUrl('thumbnails')
+            : \Avatar::create($this->name)->toBase64();
     }
 }

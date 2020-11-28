@@ -17,6 +17,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Tags\HasTags;
+use Spatie\Tags\Tag;
 
 /**
  * App\Models\User
@@ -76,11 +80,17 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static Builder|User whereUpdatedAt($value)
  * @method static Builder|User whereUsername($value)
  * @mixin Eloquent
- * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read MediaCollection|Media[] $media
  * @property-read int|null $media_count
  * @property string|null $thumbnail
  * @method static Builder|User whereThumbnail($value)
  * @property-read string $name
+ * @property Collection|Tag[] $tags
+ * @property-read int|null $tags_count
+ * @method static Builder|User withAllTags($tags, $type = null)
+ * @method static Builder|User withAllTagsOfAnyType($tags)
+ * @method static Builder|User withAnyTags($tags, $type = null)
+ * @method static Builder|User withAnyTagsOfAnyType($tags)
  */
 class User extends Authenticatable implements HasMedia
 {
@@ -90,6 +100,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use TwoFactorAuthenticatable;
     use InteractsWithMedia;
+    use HasTags;
 
     /**
      * The attributes that are mass assignable.
@@ -146,12 +157,31 @@ class User extends Authenticatable implements HasMedia
      */
     protected $appends = [
         'thumbnail',
-        'name'
+        'name',
+        'type',
+        'tags'
     ];
 
     public function getNameAttribute(): string
     {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getTypeAttribute(?int $value): string
+    {
+        switch ($value) {
+            case 0:
+                return 'Преподаватель';
+            case 1:
+                return 'Студент';
+            default:
+                return 'Не указан';
+        }
+    }
+
+    public function getTagsAttribute()
+    {
+        return $this->tags()->get();
     }
 
     public function getThumbnailAttribute(): string

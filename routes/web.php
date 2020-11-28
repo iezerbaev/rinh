@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\Inertia\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('/project')->name('project.')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Inertia\ProjectController::class, 'index'])->name('index');
+        Route::get('/', [ProjectController::class, 'index'])->name('index');
     });
 });

@@ -16,6 +16,18 @@
 .project-card__stage::before {
     content: "стадия";
 }
+.file-view {
+    display: inline-block;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid aliceblue;
+    border-radius: 12px;
+}
+.file-view__download {
+    font-size: 10pt;
+    color: #261fff;
+    text-decoration: underline;
+}
 .project-card__title::before {
     content: "наименование";
 }
@@ -23,7 +35,7 @@
     content: "отрасль";
 }
 .vodal-dialog {
-    height: unset !important;
+    height: 70% !important;
 }
 .project-card__description::before {
     content: "описание";
@@ -72,6 +84,12 @@
     cursor: pointer;
     margin: 0 12px;
     transition: .1s all;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .vue-tabpanel {
     padding-top: 48px;
@@ -94,12 +112,13 @@
 .card-footer__btn {
     opacity: 1;
 }
-.project-fill__input{
+.project-fill__input {
     border: 1px solid #d6d6d68f;
     display: block;
     width: 100%;
     margin: 18px auto;
     padding: 12px 16px;
+    border-radius: 12px;
 }
 .project-card {
     background: #fff;

@@ -3,11 +3,9 @@
         <template #title>
             Профиль
         </template>
-
         <template #description>
             Обновите информацию на вашем аккаунте.
         </template>
-
         <template #form>
             <!-- Profile Photo -->
             <div class="col-span-6 sm:col-span-4">
@@ -15,15 +13,12 @@
                 <input type="file" class="hidden"
                        ref="photo"
                        @change="updatePhotoPreview">
-
                 <jet-label for="photo" value="Фото"/>
-
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
                     <img :src="user.thumbnail" alt="Фото профиля"
                          class="rounded-full h-20 w-20 object-cover">
                 </div>
-
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" v-show="photoPreview">
                     <span class="block rounded-full w-20 h-20"
@@ -31,58 +26,63 @@
                     </span>
                 </div>
 
-                <t-modal ref="modal" header="Title of the modal">
+                <t-modal ref="modal" header="Title of the modal" @closed="onModalCloseHandler">
                     <input
                         class="hidden"
                         ref="imageFileThumbnail"
                         type="file"
                         name="image"
                         accept="image/*"
-                        @change="setImage"
+                        @change="open"
                     />
                     <div class="content">
-                        <section class="cropper-area">
+                        <section v-if="image === null">
+                            <p>Нажмите кнопку выбрать и выберите фотографию.</p>
+                            <jet-input-error :message="form.error('thumbnail')" class="mt-2"/>
+                        </section>
+                        <section class="cropper-area" :class="{'hidden': image === null}">
                             <div class="img-cropper">
-                                <vue-cropper v-if="imgSrc !== null"
-                                    ref="cropper"
-                                    :aspect-ratio="1 / 1"
-                                    :src="imgSrc"
-                                    preview=".preview"
-                                    view-mode="4"
+                                <vue-cropper ref="cropper"
+                                             :aspect-ratio="1 / 1"
+                                             :src="image"
+                                             preview=".preview"
+                                             :view-mode="3"
                                 />
                             </div>
                         </section>
-                        <section class="flex flex-row justify-center preview-area mt-2">
-                            <div class="preview w-40 h-32 rounded-full overflow-hidden" />
-                            <div class="preview w-32 h-24 rounded-full overflow-hidden" />
-                            <div class="preview w-20 h-20 rounded-full overflow-hidden" />
+                        <section class="flex flex-row justify-center preview-area mt-2" v-if="image !== null">
+                            <div class="preview w-40 h-32 rounded-full overflow-hidden"/>
+                            <div class="preview w-32 h-24 rounded-full overflow-hidden"/>
+                            <div class="preview w-20 h-20 rounded-full overflow-hidden"/>
                         </section>
                     </div>
                     <template v-slot:footer>
                         <div class="flex justify-end">
                             <jet-secondary-button class="mt-2 mr-2" @click.native.prevent="showFileChooser">
-                                Выбрать фотографию
+                                Выбрать
                             </jet-secondary-button>
                             <jet-secondary-button class="mt-2 mr-2" @click.native.prevent="$refs.modal.hide()">
                                 Закрыть
                             </jet-secondary-button>
-                            <jet-button class="mt-2 mr-2"  @click.native.prevent="saveImage">
+                            <jet-button class="mt-2 mr-2" @click.native.prevent="upload">
                                 Сохранить
                             </jet-button>
                         </div>
                     </template>
                 </t-modal>
 
-                <jet-secondary-button type="button" variant="secondary-outline" @click.native.prevent="$refs.modal.show()">Изменить</jet-secondary-button>
-
-                <jet-secondary-button type="button" class="mt-2" @click.native.prevent="deletePhoto"
+                <jet-secondary-button type="button"
+                                      variant="secondary-outline"
+                                      @click.native.prevent="$refs.modal.show()">
+                    Изменить
+                </jet-secondary-button>
+                <jet-secondary-button type="button" class="mt-2"
+                                      @click.native.prevent="deletePhoto"
                                       v-if="user.thumbnail">
                     Удалить фото
                 </jet-secondary-button>
-
                 <jet-input-error :message="form.error('photo')" class="mt-2"/>
             </div>
-
             <!-- First name -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="firstname" value="Имя"/>
@@ -90,7 +90,6 @@
                            autocomplete="firstname"/>
                 <jet-input-error :message="form.error('firstname')" class="mt-2"/>
             </div>
-
             <!-- Last name -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="lastname" value="Фамилия"/>
@@ -98,7 +97,6 @@
                            autocomplete="lastname"/>
                 <jet-input-error :message="form.error('lastname')" class="mt-2"/>
             </div>
-
             <!-- Patronymic -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="patronymic" value="Отчество"/>
@@ -106,15 +104,20 @@
                            autocomplete="patronymic"/>
                 <jet-input-error :message="form.error('patronymic')" class="mt-2"/>
             </div>
-
             <!-- Phone number -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="phone" value="Номер телефона"/>
-                <jet-input id="phone" type="text" class="mt-1 block w-full" v-model="form.phone"
+                <jet-input id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone"
                            autocomplete="phone"/>
                 <jet-input-error :message="form.error('phone')" class="mt-2"/>
             </div>
-
+            <!-- Phone number -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="birthday_at" value="Дата Рождения"/>
+                <jet-input id="birthday_at" type="date" class="mt-1 block w-full" v-model="form.birthday_at"
+                           autocomplete="birthday_at"/>
+                <jet-input-error :message="form.error('birthday_at')" class="mt-2"/>
+            </div>
             <!-- Language -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="language" value="Язык"/>
@@ -125,7 +128,6 @@
                 />
                 <jet-input-error :message="form.error('language')" class="mt-2"/>
             </div>
-
             <!-- Gender Select  -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="gender" value="Пол"/>
@@ -191,10 +193,6 @@ export default {
                     status: this.user.status,
                     type: this.user.type,
                     birthday_at: this.user.birthday_at,
-                    email_verified_at: this.user.email_verified_at,
-                    phone_verified_at: this.user.phone_verified_at,
-                    type_verified_at: this.user.type_verified_at,
-                    photo: null,
                 },
                 {
                     bag: 'updateProfileInformation',
@@ -203,9 +201,8 @@ export default {
             ),
             photoPreview: null,
             isThumbnailModal: false,
-            imgSrc: null,
-            cropImg: null,
-            data: null,
+            image: null,
+            cropImg: null
         }
     },
     computed: {
@@ -227,16 +224,13 @@ export default {
             if (this.$refs.photo) {
                 this.form.photo = this.$refs.photo.files[0]
             }
-
             this.form.post(route('user-profile-information.update'), {
                 preserveScroll: true
             });
         },
-
         selectNewPhoto() {
             this.$refs.photo.click();
         },
-
         updatePhotoPreview() {
             const reader = new FileReader();
 
@@ -246,7 +240,6 @@ export default {
 
             reader.readAsDataURL(this.$refs.photo.files[0]);
         },
-
         deletePhoto() {
             this.$inertia.delete(route('current-user-photo.destroy'), {
                 preserveScroll: true,
@@ -254,38 +247,13 @@ export default {
                 this.photoPreview = null
             });
         },
-        cropImage() {
-            // get image data for post processing, e.g. upload or setting image src
-            this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
-        },
-        setImage(e) {
-            const file = e.target.files[0];
-            if (file.type.indexOf('image/') === -1) {
-                alert('Please select an image file');
-                return;
-            }
-            if (typeof FileReader === 'function') {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    this.imgSrc = event.target.result;
-                    // rebuild cropperjs with the updated source
-                    this.$refs.cropper.replace(event.target.result);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                alert('Sorry, FileReader API not supported');
-            }
-        },
         showFileChooser() {
             this.$refs.imageFileThumbnail.click();
-        },
-        saveImage(event) {
-            this.$inertia.put('/api/v1/thumbnail', this.imgSrc);
         },
         open(e) {
             const file = e.target.files[0];
             if (file.type.indexOf('image/') === -1) {
-                this.makeToast(this.localization.error, this.localization.file.error, 'danger')
+                alert('Пожалуйста выберите файл.');
                 return;
             }
             if (typeof FileReader === 'function') {
@@ -297,34 +265,44 @@ export default {
                 reader.readAsDataURL(file);
                 this.isOpened = true;
             } else {
-                this.makeToast(this.localization.error, this.localization.file.oldBrowser, 'danger')
+                alert('Ваш браузер устарел.');
             }
         },
         upload(e) {
             this.$refs.cropper.getCroppedCanvas({width: 250, height: 250}).toBlob(async blob => {
-                this.isLoading = true;
                 let data = new FormData();
                 data.append("thumbnail", blob, "thumbnail.jpg");
                 try {
-                    const response = await HttpRequest.create().withAxios().post("ajax/image/thumbnail", data, {
+                    const client = axios.create({
+                        baseURL: "https://rinh.com/profile/api/v1",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        },
+                        withCredentials: true
+                    });
+                    let response = await client.post("/thumbnail", data, {
                         headers: {
                             "Content-Type": "multipart/form-data"
                         }
                     });
-                    this.setThumbnail(response.data.url);
                     this.image = response.data.url;
-                    this.makeToast(this.localization.success, this.localization.thumbnail.success, 'success');
+                    console.info('thumbnail uploaded');
                 } catch (e) {
-                    this.makeToast(this.localization.error, this.localization.whoops, 'danger')
+                    console.error(e);
                 }
                 this.$refs.cropper.destroy();
                 this.image = null;
-                this.isLoading = false;
-                this.isOpened = false;
             });
         },
         setThumbnail(url) {
             document.querySelector('.thumbnail').src = url;
+        },
+        onModalCloseHandler(e) {
+            this.image = null;
+            if (this.$refs.cropper !== undefined) {
+                this.$refs.cropper.destroy();
+            }
         }
     },
 }

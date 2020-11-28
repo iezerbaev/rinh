@@ -8,9 +8,9 @@ use Illuminate\Http\UploadedFile;
 
 class Thumbnail extends FormRequest
 {
-    public function authorize(AuthManager $authManager): bool
+    public function authorize(): bool
     {
-        return !$authManager->guard()->guest();
+        return true;
     }
 
     public function rules(): array

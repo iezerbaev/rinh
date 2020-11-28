@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('/project')->name('project.')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Inertia\ProjectController::class, 'index'])->name('index');
+        Route::get('/', [\App\Http\Controllers\Inertia\ProjectController::class, 'index'])
+            ->name('index');
+    });
+});
+
+Route::prefix('/profile/api/v1/')->name('v1.')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::prefix('/thumbnail')->name('thumbnail.')->group(function () {
+            Route::post('/', [FileController::class, 'upload'])->name('upload');
+            Route::delete('/', [FileController::class, 'delete'])->name('delete');
+        });
     });
 });

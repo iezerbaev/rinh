@@ -29,8 +29,8 @@ class FileController extends Controller
      */
     public function upload(ThumbnailRequest $request): JsonResponse
     {
-        $file = $request->file('thumbnail');
-        $this->uploadService->deleteAllByCollection(Auth::getUser(), 'thumbnails');
+        $file = $request->getFile();
+        $this->uploadService->deleteAllByCollection(Auth::user(), 'thumbnails');
         $url = $this->uploadService->upload($file, $request->user(), 'thumbnails');
         return response()->json([
             'success' => true,
@@ -48,5 +48,9 @@ class FileController extends Controller
                 'url' => $user->thumbnail
             ]);
         }
+        return response()->json([
+            'success' => false,
+            'error' => 'User Unauthorized'
+        ]);
     }
 }

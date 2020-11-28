@@ -1,0 +1,113 @@
+.tabs__button {
+    margin: 0 12px;
+}
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+.tabs__button {
+    margin: 0 12px;
+}
+.block-description-text::before {
+    display: block;
+    font-size: 8pt;
+    color: #6c6c6c;
+}
+.project-card__stage::before {
+    content: "стадия";
+}
+.project-card__title::before {
+    content: "наименование";
+}
+.project-card__department::before {
+    content: "отрасль";
+}
+.vodal-dialog {
+    height: unset !important;
+}
+.project-card__description::before {
+    content: "описание";
+}
+.project-card__commercialization::before {
+    content: "коммерциализация";
+}
+.project-card__files::before {
+    content: "прикрепленные файлы";
+}
+.change {
+    background-color: #651fff;
+}
+.remove {
+    background-color: #f50057;
+}
+.truncate {
+    cursor: pointer;
+}
+.project-card__title,
+.project-card__department,
+.project-card__stage,
+.project-card__description,
+.project-card__commercialization,
+.project-card__files,
+.card-footer,
+.tabs__button {
+    padding: 12px 24px;
+}
+.vue-tab:active {
+    box-shadow: 0px 0px 0px 4px #d6d6d68f;
+}
+.button-active:active {
+    box-shadow: 0px 0px 0px 4px #d6d6d68f;
+}
+.vue-tablist {
+    display: flex;
+}
+.vue-tab {
+    background: #333;
+    width: fit-content;
+    width: -moz-fit-content;
+    padding: 12px 24px;
+    color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 0 12px;
+    transition: .1s all;
+}
+.vue-tabpanel {
+    padding-top: 48px;
+}
+.card-footer__btn {
+    color: #fff;
+    margin: 0 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: .1s all;
+    border-radius: 12px;
+    opacity: .8;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.card-footer__btn {
+    opacity: 1;
+}
+.project-fill__input{
+    border: 1px solid #d6d6d68f;
+    display: block;
+    width: 100%;
+    margin: 18px auto;
+    padding: 12px 16px;
+}
+.project-card {
+    background: #fff;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px 0 #00000012;
+    position: relative;
+}
+.project-card__title {
+    border-bottom: 1px solid rgba(16, 15, 15, 0.08)
+}

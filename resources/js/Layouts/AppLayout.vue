@@ -52,12 +52,6 @@
                     preserveState: false
                 })
             },
-
-            logout() {
-                axios.post(route('logout').url()).then(response => {
-                    window.location = '/';
-                })
-            },
         }
     }
 </script>

@@ -1,8 +1,8 @@
 <template>
     <app-layout>
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="">
+            <div class="">
+                <div class="">
                     <div>
                         <button type="button" @click.prevent="isAddedModalActive = true">Добавить</button>
                         <div v-if="isAddedModalActive">
@@ -14,11 +14,19 @@
                                     </option>
                                 </select>
                             </label>
-                            <label v-if="mainActivity !== null">
-                                <select v-if="isss" v-model="secondActivity">
-                                    <option v-for="value in getValue" :value="value.id">{{ value.name }}</option>
-                                </select>
-                            </label>
+                            <div v-if="mainActivity !== null">
+                                <label v-if="isActivities">
+                                    <select v-model="secondActivity">
+                                        <option v-for="value in this.getActivities()" :value="value.id">
+                                            {{ value.name }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <div v-if="secondActivity !== null || !isActivities">
+                                    <input v-model="value" type="text">
+                                    <button @click="onSaveHandler">Сохранить</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -35,9 +43,10 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 import scienceData from "@/Data/Science/data.json";
+import Button from "@/Jetstream/Button";
 
 export default {
-    components: {AppLayout},
+    components: {Button, AppLayout},
     name: "Index",
     data() {
         return {
@@ -46,20 +55,18 @@ export default {
             isAddedModalActive: false,
             mainActivity: null,
             secondActivity: null,
+            value: null
         };
     },
     computed: {
-      ass() {
-          return this.activities.data[this.mainActivity];
-      },
-        isss() {
-          return 'properties' in getValue();
+        isActivities() {
+            return ('properties' in this.activities.data[this.mainActivity]);
         }
     },
     methods: {
-        getValue() {
-            if (this.mainActivity !== null) {
-                return this.activities.data[this.mainActivity];
+        getActivities() {
+            if (this.mainActivity !== null && this.isActivities) {
+                return this.activities.data[this.mainActivity].properties;
             }
             return {};
         },

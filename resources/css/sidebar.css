@@ -6,6 +6,10 @@ body {
     background-color: #f5f5f5;
     width: 100%;
 }
+main > *:first-child {
+    background-color: #fff;
+    margin-top: 32px;
+}
 .top-header {
     background-color: #ffffff;
     padding: 16px 32px;

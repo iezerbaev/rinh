@@ -100,10 +100,6 @@ div.remove:active {
     margin: 0px 12px;
     cursor: pointer;
 }
-main > *:first-child {
-    background-color: #fff;
-    margin-top: 32px;
-}
 .vue-tabpanel {
     padding-top: 48px;
 }

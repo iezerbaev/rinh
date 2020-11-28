@@ -2,7 +2,7 @@
     <div class="flex">
         <nav class="main-sidebar">
             <!-- Logo -->
-            <div>
+            <div class="nav-logo">
                 <inertia-link :href="route('dashboard')">
                     <img class="w-48 h-24 logo-image" :src="'/assets/main-logo.png'" alt="Логотип"/>
                 </inertia-link>
@@ -13,11 +13,10 @@
         </nav>
 
         <div class="vertical-content">
-            <!-- Page Heading -->
             <header class="top-header">
                 <div></div>
                 <div class="top-header__profile-side">
-                    <inertia-link class="top-header__btn" :href="route('project.index')">Добавить проект</inertia-link>
+                    <inertia-link class="top-header__btn button-active" :href="route('project.index')">Добавить проект</inertia-link>
                     <profile></profile>
                 </div>
             </header>

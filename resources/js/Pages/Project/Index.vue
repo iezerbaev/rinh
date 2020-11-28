@@ -1,20 +1,24 @@
 <template>
     <app-layout>
-        <tabs class="tabs max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <tab title="Мои проекты" class="tabs__button">
-                <project description="длинное описание проекта"
-                         project-name="имя проекта"
-                         department="отрасль проекта"
-                         stage="стадия проекта"
-                         commercialization="описание коммерациализации проекта"/>
-            </tab>
-            <tab title="Командные проекты" class="tabs__button">
-                Командные проекты
-            </tab>
-            <tab title="Добавить новый проект" class="tabs__button">
-                <add-project />
-            </tab>
-        </tabs>
+        <div>
+            <tabs class="tabs max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <tab title="Мои проекты" class="tabs__button">
+                    <h1 class="accent-title">Мои проекты</h1>
+                    <project description="длинное описание проекта"
+                             project-name="имя проекта"
+                             department="отрасль проекта"
+                             stage="стадия проекта"
+                             commercialization="описание коммерациализации проекта"/>
+                </tab>
+                <tab title="Командные проекты" class="tabs__button">
+                    Командные проекты
+                </tab>
+                <tab title="Добавить новый проект" class="tabs__button">
+                    <h1 class="accent-title">Добавить новый проект</h1>
+                    <add-project />
+                </tab>
+            </tabs>
+        </div>
     </app-layout>
 </template>
 

@@ -80,6 +80,9 @@ div.remove:active {
     background-color: #2F80ED;
     color: #fff;
 }
+.nav-logo {
+    border-bottom: 1px solid #0000000d;
+}
 .vue-tablist {
     display: flex;
 }
@@ -94,15 +97,25 @@ div.remove:active {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin: 0px auto;
+    margin: 0px 12px;
     cursor: pointer;
+}
+main > *:first-child {
+    background-color: #fff;
+    margin-top: 32px;
 }
 .vue-tabpanel {
     padding-top: 48px;
 }
+.accent-title {
+    color: #2F80ED;
+    font-weight: 700;
+    font-size: 18pt;
+}
 .card-footer__btn {
     padding: 8px 24px;
     margin: 0 12px;
+    background-color: #fff;
     transition: .1s all;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -124,8 +137,8 @@ div.remove:active {
 }
 .project-card {
     background: #fff;
-    border-radius: 12px;
     box-sizing: border-box;
+    margin: 12px 0;
     box-shadow: 0px 0px 4px 0 #00000012;
     position: relative;
 }

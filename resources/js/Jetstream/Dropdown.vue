@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <div @click="open = ! open">
+        <div @click="open = ! open" class="profile-view">
             <slot name="trigger"></slot>
         </div>
 

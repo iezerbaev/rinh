@@ -19,7 +19,7 @@
             </inertia-link>
             <inertia-link class="sidebar-link" :href="route('science.activity.index')">
                 <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/projects.svg'"/>
-                <span class="sidebar-link__text">Научная работа</span>
+                <span class="sidebar-link__text">Научная деятельность</span>
             </inertia-link>
 
         </div>

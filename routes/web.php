@@ -24,6 +24,10 @@ Route::middleware('auth:sanctum')->prefix('/cabinet')->group(function () {
         Route::get('/', [\App\Http\Controllers\Inertia\ProjectController::class, 'index'])
             ->name('index');
     });
+    Route::prefix('/science')->name('science.')->group(function () {
+        Route::get('/activity', [\App\Http\Controllers\Inertia\Science\ActivityController::class, 'index'])
+            ->name('activity.index');
+    });
     Route::prefix('/profile/api/v1/')->name('v1.')->group(function () {
         Route::prefix('/thumbnail')->name('thumbnail.')->group(function () {
             Route::post('/', [FileController::class, 'upload'])->name('upload');

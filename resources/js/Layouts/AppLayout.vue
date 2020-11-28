@@ -47,6 +47,9 @@
                                     <jet-dropdown-link :href="route('project.index')">
                                         Проекты
                                     </jet-dropdown-link>
+                                    <jet-dropdown-link :href="route('science.activity.index')">
+                                        Научная деятельность
+                                    </jet-dropdown-link>
                                     <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
                                         API Tokens
                                     </jet-dropdown-link>

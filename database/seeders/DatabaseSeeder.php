@@ -9,10 +9,11 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
-     * @return void
+     * @return vo"id"
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
+//        $this->call(UserSeeder::class);
+        $this->call(ScientificActivityItemSeeder::class);
     }
 }

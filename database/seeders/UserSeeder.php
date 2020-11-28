@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ScientificActivity;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
@@ -16,7 +17,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(100)->create();
+        \App\Models\User::factory(100)->create()->each(function (User $user) {
+            ScientificActivity::factory(random_int(5, 10))->make()->each(function (ScientificActivity $scientificActivity) use ($user) {
+               $scientificActivity->user_id = $user->id;
+               $scientificActivity->save();
+            });
+        });
         $this->createDeveloper();
     }
 

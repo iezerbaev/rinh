@@ -80,6 +80,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property-read int|null $media_count
  * @property string|null $thumbnail
  * @method static Builder|User whereThumbnail($value)
+ * @property-read string $name
  */
 class User extends Authenticatable implements HasMedia
 {

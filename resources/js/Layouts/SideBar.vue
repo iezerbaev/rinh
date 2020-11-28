@@ -13,7 +13,7 @@
                 <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/stack.svg'"/>
                 <span class="sidebar-link__text">Проекты</span>
             </inertia-link>
-            <inertia-link class="sidebar-link" :href="route('dashboard')">
+            <inertia-link class="sidebar-link" :href="route('networking.index')">
                 <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/networking.svg'"/>
                 <span class="sidebar-link__text">Нетворкинг</span>
             </inertia-link>

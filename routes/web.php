@@ -28,6 +28,10 @@ Route::middleware('auth:sanctum')->prefix('/cabinet')->group(function () {
         Route::get('/activity', [\App\Http\Controllers\Inertia\Science\ActivityController::class, 'index'])
             ->name('activity.index');
     });
+    Route::prefix('/networking')->name('networking.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Inertia\NetworkingController::class, 'index'])
+            ->name('index');
+    });
     Route::prefix('/profile/api/v1/')->name('v1.')->group(function () {
         Route::prefix('/thumbnail')->name('thumbnail.')->group(function () {
             Route::post('/', [FileController::class, 'upload'])->name('upload');

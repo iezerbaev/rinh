@@ -1,6 +1,24 @@
 <template>
     <app-layout>
-        Main Page
+        <div class="networking">
+            <div class="users-frame">
+                <user :name="user.name"
+                      :profile_photo="user.profile_photo"
+                      :ninja_path="user.ninja_path"
+                      :type="user.type"
+                      :tags="user.tags">
+
+                </user>
+            </div>
+            <div class="categories">
+                <div class="categories-category-frame" v-for="category of categories">
+                    <label class="categories-category-frame-label">
+                        <input class="categories-category-frame-input" type="checkbox" :value="category">
+                        <span>{{ category }}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
     </app-layout>
 </template>
 <script>

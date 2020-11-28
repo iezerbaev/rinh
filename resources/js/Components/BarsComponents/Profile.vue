@@ -38,6 +38,13 @@ export default {
         JetDropdown,
         JetDropdownLink
     },
+    methods: {
+        logout() {
+            axios.post(route('logout').url()).then(response => {
+                window.location = '/';
+            })
+        },
+    },
     name: "Profile"
 }
 </script>

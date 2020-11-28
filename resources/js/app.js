@@ -7,7 +7,6 @@ import PortalVue from 'portal-vue';
 import VueTailwind from 'vue-tailwind'
 import VueTailwindSettings from './Settings/vue-tailwind';
 
-
 Vue.use(VueTailwind, VueTailwindSettings);
 Vue.mixin({methods: {route}});
 Vue.use(InertiaApp);

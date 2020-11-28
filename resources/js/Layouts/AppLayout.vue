@@ -45,7 +45,7 @@
                                         Профиль
                                     </jet-dropdown-link>
                                     <jet-dropdown-link :href="route('project.index')">
-                                        Проект
+                                        Проекты
                                     </jet-dropdown-link>
                                     <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
                                         API Tokens
@@ -131,7 +131,7 @@
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('project.index')" :active="route().current('project.index')">
-                            Проект
+                            Проектs
                         </jet-responsive-nav-link>
 
                         <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">

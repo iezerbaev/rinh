@@ -10,13 +10,18 @@
                 <span class="sidebar-link__text">Личный кабинет</span>
             </inertia-link>
             <inertia-link class="sidebar-link" :href="route('project.index')">
-                <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/projects.svg'"/>
+                <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/stack.svg'"/>
                 <span class="sidebar-link__text">Проекты</span>
             </inertia-link>
             <inertia-link class="sidebar-link" :href="route('dashboard')">
                 <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/networking.svg'"/>
                 <span class="sidebar-link__text">Нетворкинг</span>
             </inertia-link>
+            <inertia-link class="sidebar-link" :href="route('dashboard')">
+                <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/projects.svg'"/>
+                <span class="sidebar-link__text">Научная работа</span>
+            </inertia-link>
+
         </div>
 
         <div class="sidebar__bottom">

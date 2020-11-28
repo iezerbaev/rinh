@@ -25,7 +25,7 @@
         </div>
 
         <div class="sidebar__bottom">
-            <inertia-link class="sidebar-link" :href="route('dashboard')">
+            <inertia-link class="sidebar-link" :href="route('profile.show')">
                 <img class="sidebar-link__icon" width="20" height="20" :src="'/assets/sidebar-links-icons/settings.svg'"/>
                 <span class="sidebar-link__text">Настройки</span>
             </inertia-link>
@@ -45,6 +45,13 @@ export default {
     name: "SideBar",
     components: {
         JetDropdownLink
+    },
+    methods: {
+        logout() {
+            axios.post(route('logout').url()).then(response => {
+                window.location = '/';
+            })
+        }
     }
 }
 </script>

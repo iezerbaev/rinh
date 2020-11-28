@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\ProjectModel;
-class ProjectFactory extends Factory
+class ProjectModelFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -26,8 +26,8 @@ class ProjectFactory extends Factory
             'department' => $this->faker->text,
             'stage' => $this->faker->state,
             'description' => $this->faker->text,
-            'pdf_file' => $this->faker->image(),
-            'doc_file' => $this->faker->file(),
+            'pdf_file' => $this->faker->url,
+            'doc_file' => $this->faker->url,
             'commercialization' => $this->faker->text
         ];
     }

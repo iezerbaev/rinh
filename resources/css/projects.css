@@ -35,7 +35,7 @@
     content: "отрасль";
 }
 .vodal-dialog {
-    height: 70% !important;
+    height: unset !important;
 }
 .project-card__description::before {
     content: "описание";
@@ -143,5 +143,8 @@ main > *:first-child {
     position: relative;
 }
 .project-card__title {
-    border-bottom: 1px solid rgba(16, 15, 15, 0.08)
+    border-bottom: 1px solid rgba(16, 15, 15, 0.08);
+    color: #2F80ED;
+    font-weight: 700;
+    font-size: 15pt;
 }

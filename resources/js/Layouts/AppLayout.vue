@@ -44,19 +44,14 @@
             }
         },
         methods: {
+            // это тут вообще не нужно (кажется). спать хочу пипец
             switchToTeam(team) {
                 this.$inertia.put(route('current-team.update'), {
                     'team_id': team.id
                 }, {
                     preserveState: false
                 })
-            },
-
-            logout() {
-                axios.post(route('logout').url()).then(response => {
-                    window.location = '/';
-                })
-            },
+            }
         }
     }
 </script>

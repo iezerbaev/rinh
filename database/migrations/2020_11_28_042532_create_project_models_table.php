@@ -15,9 +15,9 @@ class CreateProjectModelsTable extends Migration
     {
         Schema::create('project_models', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 64)->default('None');
-            $table->string('department', 32)->nullable();
-            $table->string('stage', 16)->nullable();
+            $table->string('name')->default('None');
+            $table->string('department')->nullable();
+            $table->string('stage')->nullable();
             $table->text('description');
             $table->string('pdf_file')->nullable();
             $table->string('doc_file')->nullable();

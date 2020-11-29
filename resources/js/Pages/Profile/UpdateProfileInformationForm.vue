@@ -274,7 +274,7 @@ export default {
                 data.append("thumbnail", blob, "thumbnail.jpg");
                 try {
                     const client = axios.create({
-                        baseURL: "https://rinh.com/profile/api/v1",
+                        baseURL: "https://rinh.com/cabinet/profile/api/v1",
                         headers: {
                             "Accept": "application/json",
                             "Content-Type": "application/json"

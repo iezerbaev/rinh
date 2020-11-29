@@ -2,12 +2,41 @@
     display: flex;
     justify-content: space-between;
 }
-
+.user-card-header {
+    cursor: pointer;
+    padding-top: 32px;
+}
 .user-card-header-profile img {
     border-radius: 6px;
     margin-right: 16px;
+    width: 48px;
 }
-
+.vodal-dialog > .user-card-header {
+    margin-bottom: 12px;
+}
+.change {
+    border: 1px solid #2F80ED;
+    color: #2F80ED;
+}
+.card-footer__btn {
+    padding: 8px 24px;
+    margin: 12px 0;
+    background-color: #fff;
+    transition: .1s all;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+.button-active:active {
+    box-shadow: 0px 0px 0px 4px #d6d6d68f;
+    background-color: #2F80ED;
+    color: #fff;
+}
 .user-card-header__name {
     font-size: 16pt;
     font-weight: 700;

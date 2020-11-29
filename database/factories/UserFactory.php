@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'gender' => $gender,
             'language' => $this->faker->randomElement(['ru', 'en']),
             'status' => 0,
-            'type' => 0,
+            'type' => $this->faker->randomElement([0, 1, 2]),
             'birthday_at' => $this->faker->dateTimeBetween('-45 years', '-18 years')->format('Y-m-d'),
             'email_verified_at' => now(),
             'type_verified_at' => now(),

@@ -158,7 +158,6 @@ class User extends Authenticatable implements HasMedia
     protected $appends = [
         'thumbnail',
         'name',
-        'type',
         'tags'
     ];
 

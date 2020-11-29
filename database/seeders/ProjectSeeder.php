@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProjectModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Spatie\Tags\Tag;
 
 class ProjectSeeder extends Seeder
 {
@@ -17,6 +15,8 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        ProjectModel::factory(110)->create();
+        Project::factory(110)->create()->each(function (Project $project) {
+            $project->attachTags(Tag::query()->inRandomOrder()->limit(random_int(7, 12))->get());
+        });
     }
 }

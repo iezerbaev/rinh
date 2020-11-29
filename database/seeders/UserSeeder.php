@@ -21,8 +21,9 @@ class UserSeeder extends Seeder
         \App\Models\User::factory(100)->create()->each(function (User $user) {
             $user->attachTags(Tag::query()->inRandomOrder()->limit(random_int(7, 12))->get());
             ScientificActivity::factory(random_int(5, 10))->make()->each(function (ScientificActivity $scientificActivity) use ($user) {
-               $scientificActivity->user_id = $user->id;
-               $scientificActivity->save();
+                $scientificActivity->user_id = $user->id;
+                $scientificActivity->save();
+                $scientificActivity->attachTags(Tag::query()->inRandomOrder()->limit(random_int(7, 12))->get());
             });
         });
         $this->createDeveloper();

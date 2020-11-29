@@ -12,6 +12,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Tags\HasTags;
 
 /**
  * App\Models\ScientificActivity
@@ -47,7 +48,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class ScientificActivity extends Model implements HasMedia
 {
-    use InteractsWithMedia, HasFactory;
+    use InteractsWithMedia, HasFactory, HasTags;
 
     protected $fillable = [
         'name',

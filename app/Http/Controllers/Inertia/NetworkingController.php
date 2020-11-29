@@ -11,7 +11,7 @@ class NetworkingController extends Controller
     public function index()
     {
         return Inertia::render('Networking/Index', [
-            'users' => User::whereType(1)->limit(30)->offset(0)->get(),
+            'users' => User::all(),
         ]);
     }
 }

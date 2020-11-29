@@ -12,7 +12,8 @@
                              :stage="project.stage"
                              :commercialization="project.commercialization"
                              :pdf_download="project.pdf_file"
-                             :doc_download="project.doc_file" />
+                             :doc_download="project.doc_file"
+                             :tags="project.tags"/>
                 </tab>
                 <tab title="Командные проекты" class="tabs__button">
                     Командные проекты

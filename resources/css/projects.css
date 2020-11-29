@@ -36,6 +36,14 @@
 }
 .vodal-dialog {
     height: unset !important;
+    top: auto;
+    bottom: auto;
+}
+.vodal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .project-card__description::before {
     content: "описание";
@@ -56,6 +64,23 @@
 }
 div.remove:active {
     background-color: #EB5757;
+}
+.user-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 16px auto;
+}
+.user-card-tags__tag {
+    cursor: default;
+    padding: 4px 24px;
+    margin: 6px;
+    border-radius: 32px;
+    border: 2px solid #2F80ED;
+    color: #2F80ED;
+    font-weight: 700;
 }
 .truncate {
     cursor: pointer;

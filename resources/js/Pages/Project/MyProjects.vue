@@ -13,6 +13,9 @@
         <div class="project-card__commercialization block-description-text truncate" @click="expandText">
             {{ commercialization }}
         </div>
+        <div class="user-card-tags">
+            <div class="user-card-tags__tag" v-for="tag of tags"> {{ tag.type }} </div>
+        </div>
         <div class="card-footer" data-project-id="1810">
             <div class="card-footer__btn change button-active" @click="toggleChangeModal">Изменить</div>
             <div class="card-footer__btn remove button-active">Удалить</div>
@@ -56,7 +59,8 @@ export default {
         description: String,
         commercialization: String,
         pdf_download: String,
-        doc_download: String
+        doc_download: String,
+        tags: Array
     },
     components: {
         FileView,

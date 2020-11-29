@@ -4,7 +4,7 @@
             <!-- Logo -->
             <div class="nav-logo">
                 <inertia-link :href="route('dashboard')">
-                    <img class="w-48 h-24 logo-image" :src="'/assets/main-logo.png'" alt="Логотип"/>
+                    <img class="w-32 h-16 logo-image" :src="'/assets/main-logo.png'" alt="Логотип"/>
                 </inertia-link>
             </div>
 

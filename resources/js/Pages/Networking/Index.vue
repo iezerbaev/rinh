@@ -3,12 +3,7 @@
         <div class="networking">
             <div class="users-frame">
                 <user v-for="user of users"
-                      :name="user.name"
-                      :profile_photo="user.profile_photo"
-                      :ninja_path="user.ninja_path"
-                      :type="user.type"
-                      :tags="user.tags">
-
+                      :user="user">
                 </user>
             </div>
             <div class="categories">
@@ -34,6 +29,7 @@ export default {
     },
     data() {
         return {
+            show: false,
             categories: [
                 'Дизайн',
                 'Программирование',
@@ -45,7 +41,12 @@ export default {
                 'Разработка ПО',
                 'Финансы',
                 'Другое'
-            ]
+            ],
+        }
+    },
+    methods: {
+        toggleChangeModal() {
+            this.$data.show = !this.$data.show;
         }
     }
 }

@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="user-card-tags">
-            <div class="user-card-tags__tag" v-for="tag of tags"> {{ tag }} </div>
+            <div class="user-card-tags__tag" v-for="tag of tags"> {{ tag.type }} </div>
         </div>
     </div>
 </template>
@@ -21,13 +21,13 @@
 <script>
 export default {
     name: "User",
-    props: {
-        name: String,
-        profile_photo: String,
-        type: String,
-        tags: Array,
-        ninja_path: String
-    }
+    props: [
+        'name',
+        'profile_photo',
+        'type',
+        'tags',
+        'ninja_path',
+    ]
 }
 </script>
 
